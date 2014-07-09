@@ -1,0 +1,30 @@
+{
+  "name": "less-css",
+  "version": "0.0.1",
+  "description": "Less CSS rules, same experience",
+  "private": true,
+  "bin": {
+    "less-css": "./bin/less-css"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "author": {
+    "name": "Peter Abraham",
+    "email": "peppierre@gmail.com",
+    "url": "https://github.com/peppierre"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/peppierre/less-css"
+  },
+  "license": "MIT",
+  "bugs": "https://github.com/peppierre/less-css/issues",
+  "dependencies": {
+    "commander": "~2.0.0",
+    "clean-css": "~2.2.0",
+    "autocmdr": "~0.0.4"
+  },
+  "devDependencies": {
+  }
+}
