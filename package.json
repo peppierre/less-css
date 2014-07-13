@@ -2,7 +2,7 @@
   "name": "less-css",
   "version": "0.0.1",
   "description": "Less CSS rules, same experience",
-  "private": true,
+  "private": false,
   "bin": {
     "less-css": "./bin/less-css"
   },
