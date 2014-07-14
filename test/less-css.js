@@ -28,11 +28,19 @@ exports.lesscss = {
     done();
   },
   'comments': function (test) {
-    test.expect(3);
+    test.expect(4);
+    test.equal(LessCss.toLessCss("// simple line comment"), "");
     test.equal(LessCss.toLessCss("/* simple block comment*/"), "");
     test.equal(LessCss.toLessCss("/* multiline \n   block comment */"), "");
     test.equal(LessCss.toLessCss("/*! important comment */"), "/*! important comment */\n");
     test.done();
+  },
+  "no more optimization" : function (test) {
+  	test.expect(3);
+  	test.equal(LessCss.toLessCss("div{margin:10px;padding:5px}"), "div{margin:10px;padding:5px}");
+  	test.equal(LessCss.toLessCss("div,span{margin:10px;padding:5px}"), "div,span{margin:10px;padding:5px}");
+  	test.equal(LessCss.toLessCss("div{margin:10px;padding:5px}\n@media screen only and (min-width:480px){div{padding:15px}}"), "div{margin:10px;padding:5px}\n@media screen only and (min-width:480px){div{padding:15px}}");
+  	test.done();
   },
   "same selector" : function (test) {
   	test.expect(5);
@@ -41,6 +49,12 @@ exports.lesscss = {
   	test.equal(LessCss.toLessCss("#id1{margin:5px}#id1{border:solid 1px red}"), "#id1{margin:5px;border:solid 1px red}");
   	test.equal(LessCss.toLessCss("a:hover{margin:5px}a:hover{border:solid 1px red}"), "a:hover{margin:5px;border:solid 1px red}");
   	test.equal(LessCss.toLessCss("div{margin:5px}div{margin:10px}"), "div{margin:10px}");
+  	test.done();
+  },
+  "unnecessary spaces everywhere" : function (test) {
+  	test.expect(2);
+  	test.equal(LessCss.toLessCss("div { margin : 10px }   div  { margin  :  5px;  }"), "div{margin:5px}");
+  	test.equal(LessCss.toLessCss("div { margin : 10px }   @media screen only and (min-width : 480px)  {  div  { margin  :  5px;  }}"), "div{margin:10px}\n@media screen only and (min-width : 480px){div{margin:5px}}");
   	test.done();
   },
   "same properties" : function (test) {
