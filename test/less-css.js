@@ -58,43 +58,43 @@ exports.lesscss = {
   },
   'comments': function (test) {
     test.expect(8);
-    test.equal(LessCss.toLessCss(
-    	"// simple line comment"),
+    test.equal(
+    	LessCss.toLessCss("// simple line comment"),
     	"",
     	"---simple line comment"
     );
-    test.equal(LessCss.toLessCss(
-    	"/* simple block comment*/"),
+    test.equal(
+    	LessCss.toLessCss("/* simple block comment*/"),
     	"",
     	"---simple block comment"
     );
-    test.equal(LessCss.toLessCss(
-    	"/* multiline \n   block comment */"),
+    test.equal(
+    	LessCss.toLessCss("/* multiline \n   block comment */"),
     	"",
     	"---multiline block comment"
     );
-    test.equal(LessCss.toLessCss(
-    	"/*! important comment */"),
+    test.equal(
+    	LessCss.toLessCss("/*! important comment */"),
     	"/*! important comment */\n",
     	"---important note"
     );
-    test.equal(LessCss.toLessCss(
-    	"div{margin:2px}// single line comment span{margin:2px}"),
+    test.equal(
+    	LessCss.toLessCss("div{margin:2px}// single line comment span{margin:2px}"),
     	"div{margin:2px}",
     	"---unterminated single line comment with rules"
     );
-    test.equal(LessCss.toLessCss(
-    	"div{margin:2px}// single line comment\n//second line comment\nspan{margin:2px}"),
+    test.equal(
+    	LessCss.toLessCss("div{margin:2px}// single line comment\n//second line comment\nspan{margin:2px}"),
     	"div,span{margin:2px}",
     	"---two single line comments with rules"
     );
-    test.equal(LessCss.toLessCss(
-    	"div{margin:2px}/* single block comment\nmultiline*/span{margin:2px}"),
+    test.equal(
+    	LessCss.toLessCss("div{margin:2px}/* single block comment\nmultiline*/span{margin:2px}"),
     	"div,span{margin:2px}",
     	"---sinbgle multiline block comment with rules"
     );
-    test.equal(LessCss.toLessCss(
-    	"div{margin:2px}/*! important */span{margin:2px}"),
+    test.equal(
+    	LessCss.toLessCss("div{margin:2px}/*! important */span{margin:2px}"),
     	"/*! important */\ndiv,span{margin:2px}",
     	"---important comment with rules"
     );
@@ -102,18 +102,18 @@ exports.lesscss = {
   },
   "no more optimization" : function (test) {
   	test.expect(3);
-  	test.equal(LessCss.toLessCss(
-  		"div{margin:10px;padding:5px}"),
+  	test.equal(
+  		LessCss.toLessCss("div{margin:10px;padding:5px}"),
   		"div{margin:10px;padding:5px}",
   		"---unoptimizable simple selector"
   	);
-  	test.equal(LessCss.toLessCss(
-  		"div,span{margin:10px;padding:5px}"),
+  	test.equal(
+  		LessCss.toLessCss("div,span{margin:10px;padding:5px}"),
   		"div,span{margin:10px;padding:5px}",
   		"--unoptimizable complex selector"
   	);
-  	test.equal(LessCss.toLessCss(
-  		"div{margin:10px;padding:5px}\n@media screen only and (min-width:480px){div{padding:15px}}"),
+  	test.equal(
+  		LessCss.toLessCss("div{margin:10px;padding:5px}\n@media screen only and (min-width:480px){div{padding:15px}}"),
   		"div{margin:10px;padding:5px}\n@media screen only and (min-width:480px){div{padding:15px}}",
   		"---unoptimizable with media query"
   	);
@@ -121,28 +121,28 @@ exports.lesscss = {
   },
   "same selector" : function (test) {
   	test.expect(5);
-  	test.equal(LessCss.toLessCss(
-  		"div{margin:5px}div{border:solid 1px red}"),
+  	test.equal(
+  		LessCss.toLessCss("div{margin:5px}div{border:solid 1px red}"),
   		"div{margin:5px;border:solid 1px red}",
   		"---more rules with same element selector"
   	);
-  	test.equal(LessCss.toLessCss(
-  		".class1{margin:5px}.class1{border:solid 1px red}"),
+  	test.equal(
+  		LessCss.toLessCss(".class1{margin:5px}.class1{border:solid 1px red}"),
   		".class1{margin:5px;border:solid 1px red}",
   		"---more rules with same class selector"
   	);
-  	test.equal(LessCss.toLessCss(
-  		"#id1{margin:5px}#id1{border:solid 1px red}"),
+  	test.equal(
+  		LessCss.toLessCss("#id1{margin:5px}#id1{border:solid 1px red}"),
   		"#id1{margin:5px;border:solid 1px red}",
   		"---more rules with same id selector"
   	);
-  	test.equal(LessCss.toLessCss(
-  		"a:hover{margin:5px}a:hover{border:solid 1px red}"),
+  	test.equal(
+  		LessCss.toLessCss("a:hover{margin:5px}a:hover{border:solid 1px red}"),
   		"a:hover{margin:5px;border:solid 1px red}",
   		"---more rules with same pseudo-selector"
   	);
-  	test.equal(LessCss.toLessCss(
-  		"div{margin:5px}div{margin:10px}"),
+  	test.equal(
+  		LessCss.toLessCss("div{margin:5px}div{margin:10px}"),
   		"div{margin:10px}",
   		"---more rules with simple element selector and matching properties"
   	);
@@ -150,13 +150,13 @@ exports.lesscss = {
   },
   "unnecessary spaces everywhere" : function (test) {
   	test.expect(2);
-  	test.equal(LessCss.toLessCss(
-  		"div { margin : 10px }   div  { margin  :  5px;  }"),
+  	test.equal(
+  		LessCss.toLessCss("div { margin : 10px }   div  { margin  :  5px;  }"),
   		"div{margin:5px}",
   		"---unnecessary space in simple rules"
   	);
-  	test.equal(LessCss.toLessCss(
-  		"div { margin : 10px }   @media screen only and (min-width : 480px)  {  div  { margin  :  5px;  }}"),
+  	test.equal(
+  		LessCss.toLessCss("div { margin : 10px }   @media screen only and (min-width : 480px)  {  div  { margin  :  5px;  }}"),
   		"div{margin:10px}\n@media screen only and (min-width : 480px){div{margin:5px}}",
   		"---unnecessary spaces in media query"
   	);
@@ -164,13 +164,13 @@ exports.lesscss = {
   },
   "same properties" : function (test) {
   	test.expect(2);
-  	test.equal(LessCss.toLessCss(
-  		"div{margin:5px}span{margin:5px}"),
+  	test.equal(
+  		LessCss.toLessCss("div{margin:5px}span{margin:5px}"),
   		"div,span{margin:5px}",
   		"---more rules with same properties and simple selectors"
   	);
-  	test.equal(LessCss.toLessCss(
-  		"span,div{margin:5px}p{margin:5px}"),
+  	test.equal(
+  		LessCss.toLessCss("span,div{margin:5px}p{margin:5px}"),
   		"div,p,span{margin:5px}",
   		"---more rules with same properties and complex selectors"
   	);
@@ -178,8 +178,8 @@ exports.lesscss = {
   },
   "same selectors and same properties" : function (test) {
   	test.expect(1);
-  	test.equal(LessCss.toLessCss(
-  		"div{margin:5px}span{padding:3px}p{padding:3px;margin:5px}span{margin:5px}div{padding:3px}p,span,div{border:solid 1px red}"),
+  	test.equal(
+  		LessCss.toLessCss("div{margin:5px}span{padding:3px}p{padding:3px;margin:5px}span{margin:5px}div{padding:3px}p,span,div{border:solid 1px red}"),
   		"div,p,span{margin:5px;padding:3px;border:solid 1px red}",
   		"---same selectors and same properties splitted in (too many) rules"
   	);
@@ -187,8 +187,8 @@ exports.lesscss = {
   },
   "same selector and same properties and media queries" : function (test) {
   	test.expect(1);
-  	test.equal(LessCss.toLessCss(
-  		"div{margin:3px}@media screen only and (min-width:480px){div{margin:5px}}@media screen only and (min-width:480px){div{margin:10px}}"),
+  	test.equal(
+  		LessCss.toLessCss("div{margin:3px}@media screen only and (min-width:480px){div{margin:5px}}@media screen only and (min-width:480px){div{margin:10px}}"),
   		"div{margin:3px}\n@media screen only and (min-width:480px){div{margin:10px}}",
   		"same selectors in different media queries"
   	);
