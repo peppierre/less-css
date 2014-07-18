@@ -17,7 +17,7 @@ if (program.args.length < 1 ) {
 	process.exit(1);
 }
 
-minimized = lesscss.toLessCss(
+minimized = lesscss.from(
 	new CleanCSS().minify(
 		fs.readFileSync(
 			program.args[0],
