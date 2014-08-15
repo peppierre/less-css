@@ -157,7 +157,7 @@ exports.lesscss = {
   	);
   	test.equal(
   		LessCss.from("div { margin : 10px }   @media screen only and (min-width : 480px)  {  div  { margin  :  5px;  }}"),
-  		"div{margin:10px}\n@media screen only and (min-width : 480px){div{margin:5px}}",
+  		"div{margin:10px}\n@media screen only and (min-width:480px){div{margin:5px}}",
   		"---unnecessary spaces in media query"
   	);
   	test.done();
