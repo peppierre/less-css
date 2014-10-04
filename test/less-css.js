@@ -156,6 +156,18 @@ exports.lesscss = {
         );
         test.done();
     },
+    "same special properties" : function (test) {
+        var blueToBlueGradient, redToWhiteGradient;
+        blueToBlueGradient = "background:#1e5799;background:-moz-linear-gradient(-45deg,#1e5799 0%,#7db9e8 100%);background:-webkit-gradient(linear,left top,right bottom,color-stop(0%,#1e5799),color-stop(100%,#7db9e8));background:-webkit-linear-gradient(-45deg,#1e5799 0%,#7db9e8 100%);background:-o-linear-gradient(-45deg,#1e5799 0%,#7db9e8 100%);background:-ms-linear-gradient(-45deg,#1e5799 0%,#7db9e8 100%);background:linear-gradient(135deg,#1e5799 0%,#7db9e8 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e5799',endColorstr='#7db9e8',GradientType=1)";
+        redToWhiteGradient = "background:#f94231;background:-moz-linear-gradient(-45deg,#f94231 0%,#ffffff 100%);background:-webkit-gradient(linear,left top,right bottom,color-stop(0%,#f94231),color-stop(100%,#ffffff));background:-webkit-linear-gradient(-45deg,#f94231 0%,#ffffff 100%);background:-o-linear-gradient(-45deg,#f94231 0%,#ffffff 100%);background:-ms-linear-gradient(-45deg,#f94231 0%,#ffffff 100%);background:linear-gradient(135deg,#f94231 0%,#ffffff 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f94231',endColorstr='#ffffff',GradientType=1)";
+        test.expect(1);
+        test.equal(
+            LessCss.from("div{" + blueToBlueGradient + ";" + redToWhiteGradient + "}"),
+            "div{" + redToWhiteGradient + "}",
+            "---more rules with same gradient background properties and simple selectors"
+        );
+        test.done();
+    },
     "same selectors and same properties" : function (test) {
         test.expect(1);
         test.equal(
