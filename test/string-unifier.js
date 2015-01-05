@@ -45,5 +45,14 @@ exports.stringUnifier = {
             "---trim white spaces around brackets"
         );
         test.done();
+    },
+    'white spaces in the middle of a media query selector': function (test) {
+        test.expect(1);
+        test.equal(
+            StringUnifier.reduceWhiteSpaces("@media   only    screen     and    (min-width:480px)"),
+            "@media only screen and (min-width:480px)",
+            "---reduce white spaces inside media query selectors"
+        );
+        test.done();
     }
 };
