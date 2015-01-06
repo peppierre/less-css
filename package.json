@@ -1,6 +1,6 @@
 {
   "name": "less-css",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Less CSS rules, same experience",
   "private": false,
   "bin": {
