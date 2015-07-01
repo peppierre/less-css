@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 'use strict';
 
-var program, fs, CleanCSS, lesscss, minimized;
+var program, fs, CleanCSS, CombineMQ, lesscss, minimized;
 program  = require('commander');
 fs = require('fs');
 CleanCSS = require('clean-css');
+CombineMQ = require('combine-mq');
 lesscss = require('../lib/less-css.js');
 
 program
@@ -18,11 +19,14 @@ if (program.args.length < 1 ) {
 }
 
 minimized = lesscss.from(
-	new CleanCSS().minify(
-		fs.readFileSync(
-			program.args[0],
-			"utf-8"
-		)
+	CombineMQ.parseCssString(
+		new CleanCSS().minify(
+			fs.readFileSync(
+				program.args[0],
+				"utf-8"
+			)
+		),
+		{}
 	)
 );
 

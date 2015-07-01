@@ -176,14 +176,5 @@ exports.lesscss = {
             "---same selectors and same properties splitted in (too many) rules"
         );
         test.done();
-    },
-    "same selector and same properties and media queries" : function (test) {
-        test.expect(1);
-        test.equal(
-            LessCss.from("div{margin:3px}@media screen only and (min-width:480px){div{margin:5px}}@media screen only and (min-width:480px){div{margin:10px}}"),
-            "div{margin:3px}\n@media screen only and (min-width:480px){div{margin:10px}}",
-            "same selectors in different media queries"
-        );
-        test.done();
     }
 };

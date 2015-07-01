@@ -1,13 +1,13 @@
 {
   "name": "less-css",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Less CSS rules, same experience",
   "private": false,
   "bin": {
     "less-css": "./bin/less-css"
   },
   "scripts": {
-    "test": "mocha -R spec"
+    "test": "grunt"
   },
   "author": {
     "name": "Peter Abraham",
@@ -26,6 +26,7 @@
     "autocmdr": "~0.0.4"
   },
   "devDependencies": {
+    "combine-mq": "^0.8.1",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-nodeunit": "^0.3.3",
     "grunt-testing-nodeunit": "^0.0.2",
@@ -33,8 +34,5 @@
     "load-grunt-tasks": "^0.4.0",
     "time-grunt": "^0.3.1",
     "jshint-stylish": "^0.2.0"
-  },
-  "scripts": {
-    "test": "grunt"
   }
 }
